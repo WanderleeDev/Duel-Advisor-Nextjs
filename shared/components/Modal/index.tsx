@@ -1,14 +1,18 @@
 "use client";
-import { PropsWithChildren, useEffect, useRef } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useModalContext } from "./useModal";
 import { MouseEvent } from "react";
 
 export default function Modal({ children }: PropsWithChildren) {
   const { open, openModal, closeModal } = useModalContext();
+  const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const modalRoot = document.getElementById("modal");
   const preventClose = (event: MouseEvent) => event.stopPropagation();
+
+  useEffect(() => {
+    setModalRoot(document.getElementById("modal"));
+  }, []);
 
   useEffect(() => {
     return () => {

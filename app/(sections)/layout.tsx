@@ -1,4 +1,4 @@
-import { DockNavigation } from "@/shared/components/DocNavigation";
+import DockNavigation from "@/shared/components/DocNavigation";
 import Title from "@/shared/Typography/Title";
 import { PropsWithChildren } from "react";
 
@@ -9,7 +9,7 @@ export default function SectionLayout({ children }: PropsWithChildren) {
         Duel Advisor
       </Title>
       {children}
-      <DockNavigation />
+      <DockNavigation className="hidden xs:inline-flex" />
     </main>
   );
 }
