@@ -3,6 +3,7 @@ import Image from "next/image";
 import logo from "../public/Yu-Gi-Oh-logo.webp";
 import BackgroundBase from "@/shared/components/BackgroundBase";
 import banner from "../public/banner.svg";
+import { Paragraph } from "@/shared/Typography/Paragraph";
 
 export default function LandingPage() {
   return (
@@ -25,14 +26,16 @@ export default function LandingPage() {
         height={38}
         priority
       />
-      <h1 className="mb-4 font-extrabold leading-none text-white select-none font-belwe tracking-wider  text-4xl sm:text-5xl text-stroke">
+
+      <h1 className="mb-4 font-extrabold leading-none text-white select-none font-belwe tracking-wider text-3xl sm:text-5xl text-stroke text-center">
         Duel Advisor
       </h1>
 
-      <p className="mb-8 text-lg font-thin font-belwe lg:text-xl text-center text-gray-200 select-none py-4 lg:py-6 text-balance max-w-3xl w-full">
+      <Paragraph className="mb-8 text-base sm:text-lg font-thin font-belwe lg:text-xl text-center text-gray-200 select-none pb-4 text-balance max-w-3xl w-full">
         Card catalog, information, strategies and more, create your custom deck
         and get a tailor-made strategy
-      </p>
+      </Paragraph>
+
       <nav className="space-y-4">
         <Link
           href="/directory"

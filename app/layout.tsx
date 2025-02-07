@@ -1,32 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
+import Providers from "@/lib/Providers";
+import { PropsWithChildren } from "react";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { setupAxiosInterceptors } from "@/lib/interceptors";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Duel Advisor",
   description: "Aplicación de gestión de cartas y estrategias",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: PropsWithChildren) {
+  setupAxiosInterceptors();
+
   return (
     <ViewTransitions>
-      <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
-        <body>{children}</body>
+      <html lang="es">
+        <body>
+          <div id="modal"></div>
+          <Toaster />
+          <Providers>{children}</Providers>
+        </body>
       </html>
     </ViewTransitions>
   );

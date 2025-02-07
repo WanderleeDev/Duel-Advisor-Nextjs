@@ -1,67 +1,57 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./style.module.css";
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
+import { Link } from "next-view-transitions";
+import { ImageBase } from "@/shared/interfaces/ImageBase.interface";
 
-const HexagonGallery = () => {
-  const navOptions = [
-    {
-      name: "Web Design",
-      img: "https://images.unsplash.com/photo-1618578906891-86e569eefe7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80",
-    },
-    {
-      name: "Graphic Design",
-      img: "https://images.unsplash.com/photo-1618578906891-86e569eefe7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80",
-    },
-    {
-      name: "Illustration",
-      img: "https://images.unsplash.com/photo-1618578906891-86e569eefe7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80",
-    },
-    {
-      name: "Motion Graphics",
-      img: "https://images.unsplash.com/photo-1618578906891-86e569eefe7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80",
-    },
-    {
-      name: "3D Animation",
-      img: "https://images.unsplash.com/photo-1618578906891-86e569eefe7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80",
-    },
-    {
-      name: "Cinematic 4D",
-      img: "https://images.unsplash.com/photo-1618578906891-86e569eefe7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80",
-    },
-    {
-      name: "Share Design",
-      img: "https://images.unsplash.com/photo-1618578906891-86e569eefe7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80",
-    },
-  ];
-  const customDelay = () =>
-    ({
-      "--delay": `0.${Math.ceil(Math.random() * 10)}s`,
-    } as CSSProperties);
+interface Props {
+  links: ImageBase[];
+  titleBase?: string;
+}
+
+export default function HexagonGallery({ links, titleBase }: Props) {
+  const [title, setTitle] = useState<string>(titleBase ?? "");
+  const onHover = (title: string) => setTitle(title);
+  const onLeave = () => setTitle("");
 
   return (
-    <nav>
-      <ul className={styles["honeycomb"]}>
-        {navOptions.map((option) => (
-          <li
-            className={styles["honeycomb-cell"]}
-            style={customDelay()}
-            key={option.name}
-          >
-            <Image
-              className={styles["honeycomb-cell_img"]}
-              width={250}
-              height={137.5}
-              src={option.img}
-              alt={option.name}
-            />
-            <span className={styles["honeycomb-cell_title"]}>
-              {option.name}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <>
+      <div className={styles["title"] + " text-stroke capitalize"}>
+        {title && <strong>{title}</strong>}
+        <span>*</span>
+      </div>
+      <nav>
+        <ul className={styles["honeycomb"]}>
+          {links.map((option, i) => (
+            <li className="contents" key={option.name}>
+              <Link
+                href={"/" + `${option.name.toLowerCase().replace(" ", "-")}`}
+                className={styles["honeycomb-cell"]}
+                style={
+                  {
+                    "--delay": `0.${i * 15}s`,
+                  } as CSSProperties
+                }
+                onMouseEnter={() => onHover(option.name)}
+                onMouseLeave={onLeave}
+              >
+                <Image
+                  className={styles["honeycomb-cell_img"]}
+                  width={250}
+                  height={137.5}
+                  src={option.img}
+                  alt={option.name}
+                />
+                <span className={styles["honeycomb-cell_title"]}>
+                  {option.name}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
-};
-
-export default HexagonGallery;
+}

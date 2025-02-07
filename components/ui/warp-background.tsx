@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import React, { HTMLAttributes, useCallback, useMemo } from "react";
 
 interface WarpBackgroundProps extends HTMLAttributes<HTMLDivElement> {

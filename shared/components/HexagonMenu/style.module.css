@@ -9,12 +9,11 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0.3rem;
-  transform: translateY(80px);
 }
 
 .honeycomb-cell {
-  -webkit-box-flex: 0;
   --delay: 0.3s;
+  user-select: none;
   flex: 0 1 120px;
   max-width: 120px;
   height: 70.5px;
@@ -43,19 +42,6 @@
     padding: 0.5em;
     font-size: 1.75em;
     margin: 65.4px 12.5px 25px;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    filter: blur(1rem);
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
   }
 }
 
@@ -98,6 +84,8 @@
   height: 200%;
   display: block;
   position: absolute;
+  object-fit: cover;
+  object-position: center;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   z-index: -1;
 }
@@ -129,9 +117,46 @@
   opacity: 0;
 }
 
-.honeycomb_Hidden {
-  display: none;
-  opacity: 0;
-  width: 250px;
-  margin: 0 12.5px;
+.title {
+  font-family: "Belwe", sans-serif;
+  font-size: 1.7rem;
+  color: white;
+  max-width: 80rem;
+  padding-bottom: 1rem;
+  user-select: none;
+  text-align: center;
+
+  @media (width >= 750px) {
+    font-size: 2.5rem;
+    text-align: right;
+  }
+
+  @media (width >= 1200px) {
+    font-size: 3.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-inline: auto;
+  }
+
+  & span {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  & strong {
+    animation: fadeIn 0.25s ease-in-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    filter: blur(1rem);
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
 }

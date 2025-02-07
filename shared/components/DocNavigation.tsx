@@ -29,19 +29,23 @@ export function DockNavigation() {
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2">
         <Dock iconMagnification={60} iconDistance={100}>
           {menuOptions.map((option, i) => (
-            <Link
-              key={option.name}
-              href={"/" + `${i === 0 ? "" : option.name.toLowerCase()}`}
+            <DockIcon
+              key={i}
+              className="bg-white/10 hover:bg-white/30 transition-colors"
             >
-              <DockIcon className="bg-white/10 hover:bg-white/30 transition-colors">
+              <Link
+                className="contents"
+                key={option.name}
+                href={"/" + `${i === 0 ? "" : option.name.toLowerCase()}`}
+              >
                 <Tooltip>
                   <TooltipTrigger asChild>{option.icon}</TooltipTrigger>
                   <TooltipContent className="-translate-y-2">
                     <p>{option.name}</p>
                   </TooltipContent>
                 </Tooltip>
-              </DockIcon>
-            </Link>
+              </Link>
+            </DockIcon>
           ))}
         </Dock>
       </div>
