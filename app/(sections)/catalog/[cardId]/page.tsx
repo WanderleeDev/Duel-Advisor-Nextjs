@@ -47,7 +47,7 @@ export default async function CardPage({
   } = (await fetchData<CardDataSetResponse>(`?id=${cardId}`)).data[0];
 
   return (
-    <div className="flex flex-col gap-20 md:gap-32 xl:gap-44">
+    <div className="flex flex-col gap-20 md:gap-32">
       <CardBaseInfo
         description={desc}
         image={card_images[0].image_url}

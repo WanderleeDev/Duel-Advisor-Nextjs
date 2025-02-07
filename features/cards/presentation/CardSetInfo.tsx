@@ -6,6 +6,7 @@ import {
 } from "@radix-ui/react-accordion";
 import { CardSet } from "../domain/models/Card.model";
 import Title from "@/shared/Typography/Title";
+import { ChevronDown } from "lucide-react";
 
 interface Props {
   data: CardSet[];
@@ -27,13 +28,13 @@ export default function CardSetInfo({ data = [] }: Props) {
         {data.map(({ set_name, ...restCard }) => (
           <Accordion
             key={`${set_name}-${restCard.set_rarity_code}-${restCard.set_code}`}
-            type="single"
-            collapsible
+            type="multiple"
             className="bg-gray-800/80 rounded-lg border border-indigo-500/30 h-fit py-2"
           >
-            <AccordionItem value="details" className="border-b-0">
-              <AccordionTrigger className="px-4 py-2 text-indigo-500 hover:text-indigo-400 font-semibold">
+            <AccordionItem value={`details ${set_name}`} className="border-b-0">
+              <AccordionTrigger className="px-4 py-2 text-indigo-500 hover:text-indigo-400 font-semibold w-full flex justify-between items-center">
                 {set_name}
+                <ChevronDown />
               </AccordionTrigger>
               <AccordionContent className="px-4 pb-4">
                 <div className="space-y-3 text-white">

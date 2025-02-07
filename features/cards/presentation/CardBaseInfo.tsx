@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import CopyToClipBoardButton from "@/shared/components/CopyToClipBoardButton";
 import Link from "next/link";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
 interface Props {
   title: string;
@@ -71,8 +72,13 @@ export default function CardBaseInfo({
             textToCopy=""
             label="Share page"
           />
-          <Link href={externalLink} target="_blank">
+          <Link
+            href={externalLink}
+            target="_blank"
+            className="flex items-center gap-2 hover:underline-offset-4  focus-within:underline-offset-4 hover:underline hover:text-amber-400 transition-all"
+          >
             External Founts
+            <ChevronRight className="size-5" />
           </Link>
         </div>
       </div>
